@@ -12,6 +12,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-rec
 	texlive-lang-arabic \
 	texlive-lang-cyrillic \
 	texlive-generic-recommended \
+	texlive-generic-extra \
 	texlive-publishers \
 	texlive-science \
     texlive-xetex \
