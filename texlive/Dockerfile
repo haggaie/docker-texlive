@@ -11,6 +11,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-rec
 	texlive-latex-extra \
 	texlive-lang-arabic \
 	texlive-lang-cyrillic \
+	texlive-lang-japanese \
 	texlive-generic-recommended \
 	texlive-generic-extra \
 	texlive-publishers \
