@@ -1,4 +1,4 @@
-FROM haggaie/texlive:stretch
+FROM haggaie/texlive:buster
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
 	latexmk \
