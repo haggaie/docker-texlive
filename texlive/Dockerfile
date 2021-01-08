@@ -2,7 +2,9 @@ FROM debian:buster
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
 	biber \
+	latexmk \
     lmodern \
+	make \
 	texlive-bibtex-extra \
 	texlive-latex-recommended \
 	texlive-font-utils \
