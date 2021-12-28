@@ -7,7 +7,7 @@ Run `pdflatex` for example with:
 
 Check the example [Makefile](Makefile) for how you may use this image in a project.
 
-For Visual Studio Code's Latex Workshop extension, add the following snippet to your workspace settings.
+For Visual Studio Code's LaTeX Workshop extension, add the following snippet to your workspace settings.
 
 ```json
     {
