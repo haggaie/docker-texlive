@@ -1,6 +1,6 @@
-# Sample makefile to use with the texlive / mklatex containers
+# Sample makefile to use with the texlive containers
 
-LATEXMK=docker run --rm -v `readlink -f $${PWD}`:/document haggaie/latexmk
+LATEXMK=docker run --rm -v `readlink -f $${PWD}`:/document haggaie/texlive latexmk
 XELATEX=docker run --rm -v `readlink -f $${PWD}`:/document haggaie/texlive xelatex
 
 %.pdf: %.tex
