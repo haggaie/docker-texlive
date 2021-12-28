@@ -1,4 +1,6 @@
-FROM debian:buster
+ARG RELEASE=buster
+
+FROM debian:$RELEASE
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
 	biber \
