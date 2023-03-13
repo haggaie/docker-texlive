@@ -21,12 +21,15 @@ RUN --mount=type=cache,target=/var/cache/apt \
 	texlive-lang-arabic \
 	texlive-lang-cyrillic \
 	texlive-lang-japanese \
-	texlive-generic-recommended \
-	texlive-generic-extra \
 	texlive-publishers \
 	texlive-science \
 	texlive-xetex \
-	ghostscript \
+	ghostscript && \
+  if [ "$RELEASE" = "buster" || "$RELEASE" = "stretch" ] ; then \
+	apt-get -y --no-install-recommends install \
+	texlive-generic-recommended \
+	texlive-generic-extra ; \
+  fi \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /document
