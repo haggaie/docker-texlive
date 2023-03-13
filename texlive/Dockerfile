@@ -2,7 +2,9 @@ ARG RELEASE=buster
 
 FROM debian:$RELEASE
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
+RUN --mount=type=cache,target=/var/cache/apt \
+    --mount=type=cache,target=/var/lib/apt \
+	apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
 	biber \
 	culmus \
 	fonts-font-awesome \
