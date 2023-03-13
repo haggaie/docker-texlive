@@ -3,7 +3,7 @@
 dir=$(dirname $0)
 
 for release in buster stretch bookworm ; do
-    docker build -t haggaie/texlive:$release --build-arg $release - < $dir/Dockerfile &
+    docker build -t haggaie/texlive:$release --build-arg RELEASE=$release - < $dir/Dockerfile &
 done
 
 wait
