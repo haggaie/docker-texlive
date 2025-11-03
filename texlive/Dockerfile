@@ -2,8 +2,8 @@ ARG RELEASE=buster
 
 FROM debian:$RELEASE
 
-RUN --mount=type=cache,target=/var/cache/apt \
-    --mount=type=cache,target=/var/lib/apt \
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
 	apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
 	biber \
 	culmus \

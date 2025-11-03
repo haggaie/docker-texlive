@@ -2,10 +2,19 @@
 
 dir=$(dirname $0)
 
+# Ensure buildx builder exists and is active
+docker buildx create --name multiarch --driver docker-container --use 2>/dev/null || docker buildx use multiarch
+
 for release in buster stretch bookworm ; do
-    docker build -t haggaie/texlive:$release --build-arg RELEASE=$release - < $dir/Dockerfile &
+    docker buildx build \
+        --platform linux/amd64,linux/arm64 \
+        -t haggaie/texlive:$release \
+        --build-arg RELEASE=$release \
+        -f $dir/Dockerfile \
+        $dir &
 done
 
 wait
 
-docker tag haggaie/texlive:bookworm haggaie/texlive:latest
+# Tag bookworm as latest
+docker buildx imagetools create -t haggaie/texlive:latest haggaie/texlive:bookworm
