@@ -1,4 +1,4 @@
-ARG RELEASE=buster
+ARG RELEASE=bookworm
 
 FROM debian:$RELEASE
 
@@ -24,12 +24,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 	texlive-publishers \
 	texlive-science \
 	texlive-xetex \
-	ghostscript && \
-  if [ "$RELEASE" = "buster" || "$RELEASE" = "stretch" ] ; then \
-	apt-get -y --no-install-recommends install \
-	texlive-generic-recommended \
-	texlive-generic-extra ; \
-  fi \
+	ghostscript \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /document

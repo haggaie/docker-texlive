@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        release: ["buster", "stretch", "bookworm"]
+        release: ["bookworm", "trixie"]
 
     steps:
     - uses: actions/checkout@v3
@@ -32,7 +32,7 @@ jobs:
           ${{ secrets.DOCKER_HUB_USERNAME }}/texlive
         flavor: |
           prefix=${{ matrix.release }}-
-          latest=${{ matrix.release == 'buster' && 'auto' || 'false' }}
+          latest=${{ matrix.release == 'trixie' && 'auto' || 'false' }}
         # generate Docker tags based on the following events/attributes
         tags: |
           type=ref,event=branch
