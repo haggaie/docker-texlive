@@ -2,8 +2,11 @@ ARG RELEASE=bookworm
 
 FROM debian:$RELEASE
 
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+ARG TARGETARCH
+ARG RELEASE
+
+RUN --mount=type=cache,id=apt-cache-${TARGETARCH}-${RELEASE},target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,id=apt-lib-${TARGETARCH}-${RELEASE},target=/var/lib/apt,sharing=locked \
 	apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
 	biber \
 	culmus \
