@@ -18,4 +18,4 @@ done
 wait
 
 # Tag bookworm as latest
-docker buildx imagetools create -t haggaie/texlive:latest haggaie/texlive:trixie
+docker tag haggaie/texlive:trixie haggaie/texlive:latest
