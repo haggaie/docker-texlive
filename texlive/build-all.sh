@@ -11,6 +11,7 @@ for release in bookworm trixie ; do
         -t haggaie/texlive:$release \
         --build-arg RELEASE=$release \
         -f $dir/Dockerfile \
+        --load \
         $dir &
 done
 
