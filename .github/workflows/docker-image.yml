@@ -4,15 +4,15 @@ on:
   push:
     branches: [ main ]
     tags: [ 'v*.*.*' ]
-    pull_request:
-      branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        release: ["buster", "stretch", "bookworm"]
+        release: ["bookworm", "trixie"]
 
     steps:
     - uses: actions/checkout@v3
@@ -32,7 +32,7 @@ jobs:
           ${{ secrets.DOCKER_HUB_USERNAME }}/texlive
         flavor: |
           prefix=${{ matrix.release }}-
-          latest=${{ matrix.release == 'buster' && 'auto' || 'false' }}
+          latest=${{ matrix.release == 'trixie' && 'auto' || 'false' }}
         # generate Docker tags based on the following events/attributes
         tags: |
           type=ref,event=branch
@@ -42,13 +42,17 @@ jobs:
           type=semver,pattern={{major}}
           type=sha
 
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
 
     - name: Build and push
       uses: docker/build-push-action@v4
       with:
         context: texlive
+        platforms: linux/amd64,linux/arm64
         push: ${{ github.event_name != 'pull_request' }}
         build-args: |
           RELEASE=${{ matrix.release }}

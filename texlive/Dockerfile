@@ -1,9 +1,12 @@
-ARG RELEASE=buster
+ARG RELEASE=bookworm
 
 FROM debian:$RELEASE
 
-RUN --mount=type=cache,target=/var/cache/apt \
-    --mount=type=cache,target=/var/lib/apt \
+ARG TARGETARCH
+ARG RELEASE
+
+RUN --mount=type=cache,id=apt-cache-${TARGETARCH}-${RELEASE},target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,id=apt-lib-${TARGETARCH}-${RELEASE},target=/var/lib/apt,sharing=locked \
 	apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
 	biber \
 	culmus \
@@ -24,12 +27,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
 	texlive-publishers \
 	texlive-science \
 	texlive-xetex \
-	ghostscript && \
-  if [ "$RELEASE" = "buster" || "$RELEASE" = "stretch" ] ; then \
-	apt-get -y --no-install-recommends install \
-	texlive-generic-recommended \
-	texlive-generic-extra ; \
-  fi \
+	ghostscript \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /document
