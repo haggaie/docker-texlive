@@ -12,11 +12,14 @@ RUN --mount=type=cache,id=apt-cache-${TARGETARCH}-${RELEASE},target=/var/cache/a
 	culmus \
 	fonts-font-awesome \
 	fonts-linuxlibertine \
+	git \
 	latexmk \
+	latexdiff \
 	lmodern \
 	make \
 	texlive-bibtex-extra \
 	texlive-latex-recommended \
+	texlive-extra-utils \
 	texlive-font-utils \
 	texlive-fonts-recommended \
 	texlive-fonts-extra \
